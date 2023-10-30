@@ -1,0 +1,22 @@
+{
+    "version": 2,
+    "builds": [{ "src": "/frontend",
+        "use": "@vercel/static-build",
+        "config": {
+          "buildCommand": "npm install && npm start",
+          "outputDirectory": "frontend_build"
+        }
+      },
+      {
+        "src": "/backend",
+        "use": "@vercel/node",
+        "config": {
+          "buildCommand": "npm run dev",
+          "devCommand": "npm run dev -- --port 9000"
+        }
+      }
+    ],
+    "routes": [
+      { "src": "/api/(.*)", "dest": "backend/$1" }
+    ]
+  }
